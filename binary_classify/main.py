@@ -16,7 +16,7 @@ class SimpleNN(torch.nn.Module):
 
 def target_func(x):
     y = x[:, 0] * x[:, 0] + x[:, 1] * 2.0
-    ans = torch.where(y < 0.0, torch.tensor(1.0, dtype=torch.float32), torch.tensor(0.0, dtype=torch.float32))
+    ans = torch.where(y < 0.0, torch.tensor(0.0, dtype=torch.float32), torch.tensor(1.0, dtype=torch.float32))
     return ans.reshape([-1, 1])
 
 
