@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "binclf"
+version = "0.1.0"
+description = ""
+authors = ["hjmr <2620990+hjmr@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "simple_binary_classify"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = "^2.0.1"
+numpy = "^1.25.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
