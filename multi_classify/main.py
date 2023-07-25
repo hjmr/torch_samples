@@ -28,6 +28,19 @@ def target_func(x):
     return ans.reshape([-1, 3])
 
 
+def target_func2(x):
+    y = x[:, 0] * x[:, 0] + x[:, 1] * 2.0
+    ans = []
+    for y_val in y:
+        if y_val < -0.3:
+            ans.append(0)
+        elif y_val < 0.3:
+            ans.append(1)
+        else:
+            ans.append(2)
+    return torch.tensor(ans, dtype=torch.int64)
+
+
 model = SimpleNN(2, 3, 3)
 optimizer = torch.optim.SGD(model.parameters(), lr=1e-4)
 
@@ -36,7 +49,7 @@ for epoch in range(5000):
     x = torch.tensor(rnd)
 
     y = model(x)
-    y_hat = target_func(x)
+    y_hat = target_func2(x)
     E = torch.nn.functional.cross_entropy(y, y_hat, reduction="sum")
 
     optimizer.zero_grad()
@@ -48,7 +61,8 @@ rnd = [[np.random.uniform(-1.0, 1.0), np.random.uniform(-1.0, 1.0)] for _ in ran
 x = torch.tensor(rnd)
 y = model(x)
 y_hat = target_func(x)
+y_hat2 = target_func2(x)
 
-result = list(zip(y.data, y_hat.data))
-for yy, yh in result:
-    print(yy, yh)
+result = list(zip(y.data, y_hat.data, y_hat2.data))
+for yy, yh, yh2 in result:
+    print(yy, yh, yh2)
